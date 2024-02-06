@@ -27,8 +27,8 @@ const Pagination: React.FC<PaginationProps> = ({ page, total, onChange = () => {
   }, 500);
 
   const handleNextPage = () => {
-    setValue(value + 1);
-    onChange && onChange(value + 1);
+    setValue(page + 1);
+    onChange && onChange(page + 1);
   };
 
   return (
