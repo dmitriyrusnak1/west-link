@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import debounce from 'lodash.debounce';
+import classes from './style.module.css';
 
 interface PaginationProps {
   page: number;
@@ -43,7 +44,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, total, onChange = () => {
           setValue(Number(e.target.value));
           handlePage(e);
         }}
-        className='text-center border-[1px] bg-transparent border-[#CDCDD1] rounded-[10px] mr-[10px] w-[40px] h-[30px] py-[4px] px-[3px] number-input'
+        className={`text-center border-[1px] bg-transparent border-[#CDCDD1] rounded-[10px] mr-[10px] w-[40px] h-[30px] py-[4px] px-[3px] ${classes['number-input']}`}
       />
       <span className='mr-[5px] pt-[4px] leading-[22px] font-normal text-[16px]'>of {total}</span>
       <button

@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, HTMLProps } from 'react';
 import cn from '../../utils/cn';
+import classes from './style.module.css';
 
 interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   id: string;
@@ -17,11 +18,11 @@ const Checkbox: React.FC<CheckboxProps> = ({ id, checked, onChange, label, ...pr
   };
 
   return (
-    <div className='ml-[40px] checkbox-wrapper'>
+    <div className={`ml-[40px] ${classes['checkbox-wrapper']}`}>
       <label className='flex align-center justify-center' htmlFor={id}>
         <input
           className={cn({
-            checked: value,
+            [`${classes['checked']}`]: value,
           })}
           type='checkbox'
           id={id}
