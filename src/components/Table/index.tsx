@@ -1,26 +1,26 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, ChangeEvent } from 'react';
 import PlusIcon from '../../assets/plus.svg';
 import cn from '../../utils/cn';
 import CheckIcon from '../../assets/checked.svg';
 import CheckBox from '../Checkbox';
 import { fetchData } from '../../services';
 import Paggination from '../Paggination';
+import { UserItem } from '../../mock/data';
+import { TFilter } from '../../common/types';
 
 export default function Table() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<UserItem[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(1);
-  const [error, setError] = useState('');
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState<TFilter>();
 
-  const loadData = async (nextPage, filter) => {
+  const loadData = async (nextPage?: number, limit?: number, filter?: TFilter) => {
     try {
-      const { data, page, total } = await fetchData(nextPage, undefined, filter);
+      const { data, page, total } = await fetchData(nextPage, limit, filter);
       setData(data);
       setPage(page);
       setTotal(total);
     } catch (e) {
-      setError(e);
       console.log(e);
     }
   };
@@ -31,16 +31,16 @@ export default function Table() {
     })();
   }, []);
 
-  const loadMore = async (page) => {
-    await loadData(page, filter);
+  const loadMore = async (page: number) => {
+    await loadData(page, undefined, filter);
   };
 
-  const handleFilter = async (e) => {
+  const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
     const nextPage = 1;
     const filter = e.target.checked ? { status: 'Deleted' } : undefined;
     setPage(nextPage);
     setFilter(filter);
-    await loadData(nextPage, filter);
+    await loadData(nextPage, undefined, filter);
   };
 
   return (

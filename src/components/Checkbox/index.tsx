@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import React, { useState, ChangeEvent, HTMLProps } from 'react';
 import cn from '../../utils/cn';
 
-export default function Checkbox({ id, checked, onChange, label, ...props }) {
-  const [value, setChecked] = useState(checked);
+interface CheckboxProps extends HTMLProps<HTMLInputElement> {
+  id: string;
+  checked: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+}
 
-  const handleChange = (e) => {
+const Checkbox: React.FC<CheckboxProps> = ({ id, checked, onChange, label, ...props }) => {
+  const [value, setChecked] = useState<boolean>(checked);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked((prev) => !prev);
     onChange && onChange(e);
   };
@@ -28,4 +35,6 @@ export default function Checkbox({ id, checked, onChange, label, ...props }) {
       </label>
     </div>
   );
-}
+};
+
+export default Checkbox;

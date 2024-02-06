@@ -1,5 +1,13 @@
-export default function Pagination({ page, total, onChange = () => {} }) {
-  const handleNextPage = (e) => {
+import React, { ChangeEvent } from 'react';
+
+interface PaginationProps {
+  page: number;
+  total: number;
+  onChange: (page: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({ page, total, onChange = () => {} }) => {
+  const handleNextPage = (e: ChangeEvent<HTMLInputElement>) => {
     const page = Number(e.target.value);
     if (Number.isNaN(page) || page < 1 || page > total) {
       return alert(`Please use value from 1 to ${total}`);
@@ -13,9 +21,9 @@ export default function Pagination({ page, total, onChange = () => {} }) {
       <span className='mr-[10px] py-[4px] leading-[22px] font-normal text-[16px]'>Page</span>
       <input
         type='number'
-        value={page}
         max={total}
         min={1}
+        value={page}
         onChange={handleNextPage}
         className='text-center border-[1px] bg-transparent border-[#CDCDD1] rounded-[10px] mr-[10px] w-[40px] h-[30px] py-[4px] px-[3px] number-input'
       />
@@ -29,4 +37,6 @@ export default function Pagination({ page, total, onChange = () => {} }) {
       </button>
     </div>
   );
-}
+};
+
+export default Pagination;

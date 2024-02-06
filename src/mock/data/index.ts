@@ -1,4 +1,12 @@
-export default [
+export type UserItem = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
+  status: string;
+};
+
+const data: UserItem[] = [
   {
     first_name: 'John',
     last_name: 'Doe',
@@ -70,3 +78,5 @@ export default [
     status: 'Invited',
   },
 ];
+
+export default data;
