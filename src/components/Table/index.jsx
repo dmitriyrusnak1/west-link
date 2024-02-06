@@ -7,15 +7,15 @@ import { fetchData } from '../../services';
 import Paggination from '../Paggination';
 
 export default function Table() {
-  const [checked, setChecked] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(1);
   const [error, setError] = useState('');
+  const [filter, setFilter] = useState();
 
-  const loadData = async (nextPage) => {
+  const loadData = async (nextPage, filter) => {
     try {
-      const { data, page, total } = await fetchData(nextPage);
+      const { data, page, total } = await fetchData(nextPage, undefined, filter);
       setData(data);
       setPage(page);
       setTotal(total);
@@ -32,19 +32,27 @@ export default function Table() {
   }, []);
 
   const loadMore = async (page) => {
-    await loadData(page);
+    await loadData(page, filter);
+  };
+
+  const handleFilter = async (e) => {
+    const nextPage = 1;
+    const filter = e.target.checked ? { status: 'Deleted' } : undefined;
+    setPage(nextPage);
+    setFilter(filter);
+    await loadData(nextPage, filter);
   };
 
   return (
     <>
       <div className='mt-[30px] mx-[40px]'>
         <div className='ml-[20px] flex flex-row items-center justify-center'>
-          <div className='leading-[41px text-black font-bold text-[34px] font-["Cormorant Garamond"]'>
+          <div className='leading-[41px text-black font-bold text-[34px] font-cormorant-garamond'>
             Users
           </div>
-          <CheckBox id='deleted' checked={checked} setChecked={setChecked} label='Deleted' />
-          <button className='ml-auto flex items-center justify-center uppercase py-[6px] pl-[10px] pr-[20px] leading-[29px] text-white font-bold text-[21px] text-center bg-[#5D5FEF] rounded-[10px]'>
-            <img src={PlusIcon} alt='' />
+          <CheckBox id='deleted' checked={false} onChange={handleFilter} label='Deleted' />
+          <button className='tracking-[.04em] ml-auto flex items-center justify-center uppercase py-[6px] pl-[10px] pr-[20px] leading-[29px] text-white font-bold text-[21px] text-center bg-[#5D5FEF] rounded-[10px]'>
+            <img src={PlusIcon} alt='' className='mr-[10px]' />
             add user
           </button>
         </div>
@@ -70,7 +78,7 @@ export default function Table() {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='font-barlow-semi-condensed'>
               {!!data.length &&
                 data.map((item, idx) => (
                   <Fragment key={idx}>

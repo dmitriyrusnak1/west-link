@@ -8,7 +8,8 @@ export default {
       },
       fontFamily: {
         'barlow-condensed': ['Barlow Condensed'],
-        'cormorant garamond': ['Cormorant Garamond'],
+        'barlow-semi-condensed': ['Barlow Semi Condensed'],
+        'cormorant-garamond': ['Cormorant Garamond'],
       },
     },
   },

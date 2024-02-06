@@ -24,6 +24,13 @@
 }
 
 @font-face {
+  font-family: 'Barlow Semi Condensed';
+  src: url('fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Cormorant Garamond';
   src: url('fonts/Cormorant_Garamond/CormorantGaramond-Regular.ttf') format('truetype');
   font-weight: normal;
@@ -40,7 +47,6 @@
 *,
 *::after,
 *::before {
-  font-family: 'barlow condensed';
   box-sizing: border-box;
 }
 
@@ -50,11 +56,13 @@ body,
   height: 100%;
 }
 
+:root {
+  font-family: 'Barlow Condensed';
+}
+
 .checkbox-wrapper input[type='checkbox'] {
-  /* removing default appearance */
   -webkit-appearance: none;
   appearance: none;
-  /* creating a custom design */
   width: 20px;
   height: 20px;
   border: 1px solid#A5A6F6;
@@ -63,12 +71,12 @@ body,
   cursor: pointer;
 }
 
-input.checked {
+.checkbox-wrapper input.checked {
   background-color: white;
   position: relative;
 }
 
-input.checked::before {
+.checkbox-wrapper input.checked::before {
   content: '';
   width: 14px;
   height: 14px;
@@ -97,13 +105,12 @@ input.checked::before {
   box-shadow: 0 0 5px #5d5fef;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input.number-input::-webkit-outer-spin-button,
+input.number-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
-input[type='number'] {
+input[type='number'].number-input {
   -moz-appearance: textfield;
 }
