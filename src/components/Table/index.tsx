@@ -7,21 +7,26 @@ import { fetchData } from '../../services';
 import Paggination from '../Paggination';
 import { UserItem } from '../../mock/data';
 import { TFilter } from '../../common/types';
+import Loader from '../Loader';
 
 export default function Table() {
   const [data, setData] = useState<UserItem[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(1);
   const [filter, setFilter] = useState<TFilter>();
+  const [loading, setLoading] = useState(false);
 
   const loadData = async (nextPage?: number, limit?: number, filter?: TFilter) => {
     try {
+      setLoading(true);
       const { data, page, total } = await fetchData(nextPage, limit, filter);
       setData(data);
       setPage(page);
       setTotal(total);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,6 +63,7 @@ export default function Table() {
         </div>
 
         <div className='relative overflow-x-auto mt-[55px]'>
+          {loading && <Loader />}
           <table className='w-full border-collapse border-spacing-0'>
             <thead className='leading-[22px] font-normal text-[16px] text-left text-black uppercase'>
               <tr>
