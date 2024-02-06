@@ -3,10 +3,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      boxShadow: {
+        light: '0px 4px 4px 0px rgba(0,0,0, 0.1);',
+      },
       fontFamily: {
-        'barlow-condensed': ['Barlow_Condensed'],
-        'barlow-semi-condensed': ['Barlow-Semi-Condensed'],
-        cormorant_garamond: ['Cormorant_Garamond'],
+        'barlow-condensed': ['Barlow Condensed'],
+        'cormorant garamond': ['Cormorant Garamond'],
       },
     },
   },

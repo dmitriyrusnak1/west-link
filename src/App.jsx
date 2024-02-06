@@ -7,7 +7,7 @@ function App() {
       <div className='flex h-full w-[80px] z-30 flex-col fixed inset-y-0'>
         <Sidebar />
       </div>
-      <main className='pl-[80px] h-full flex flex-col'>
+      <main className='pl-[80px] h-full flex flex-col bg-[#F3F3F3]'>
         <Dashboard />
       </main>
     </div>
